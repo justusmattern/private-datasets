@@ -62,7 +62,7 @@ def run(args):
 
     privacy_engine.attach(optimizer)
 
-    train_texts, train_labels = get_data('data/imdb_train.txt')
+    train_texts, train_labels = get_data('imdb/imdb_train.txt')
     train_data = Dataset(train_texts, train_labels, tokenizer.eos_token)
 
     train_loader = torch.utils.data.DataLoader(train_data, shuffle=False, batch_size=args.batch_size)
@@ -77,7 +77,8 @@ def run(args):
             tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids.to('cuda:0')
             tokenized_texts = tokenizer(total_texts, truncation=True, max_length=1024, return_tensors='pt', padding=True).input_ids.to('cuda:0')
 
-            lm_loss = model(tokenized_prompts, labels=tokenized_texts).loss # - model(tokenized_prompts, labels=tokenized_text).loss*len()
+            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss # - model(tokenized_prompts, labels=tokenized_text).loss*len()
+            print(lm_loss)
             optimizer.step(loss=lm_loss)
             total_loss += lm_loss.item()
 
