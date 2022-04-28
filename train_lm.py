@@ -46,6 +46,7 @@ def pre_process(texts, labels):
 
 def run(args):
     model = GPT2LMHeadModel.from_pretrained(args.model)
+    model.parallelize()
     tokenizer = GPT2Tokenizer.from_pretrained(args.tokenizer)
     tokenizer.pad_token = tokenizer.eos_token
     optimizer = torch.optim.Adam(model.parameters(), lr = 1e-4)
@@ -73,12 +74,12 @@ def run(args):
         for texts, labels in train_loader:
             
             prompts, total_texts = pre_process(texts, labels)
-            tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids
-            tokenized_texts = tokenizer(total_texts, truncation=True, max_length=1024, return_tensors='pt', padding=True).input_ids
+            tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids.to('cuda:0')
+            tokenized_texts = tokenizer(total_texts, truncation=True, max_length=1024, return_tensors='pt', padding=True).input_ids.to('cuda:0')
 
             lm_loss = model(tokenized_prompts, labels=tokenized_texts).loss # - model(tokenized_prompts, labels=tokenized_text).loss*len()
             optimizer.step(loss=lm_loss)
-            total_loss += lm_loss
+            total_loss += lm_loss.item()
 
         print('total lm loss', total_loss/len(train_data))
 
