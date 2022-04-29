@@ -46,21 +46,22 @@ def pre_process(texts, labels):
 
 def run(args):
     model = GPT2LMHeadModel.from_pretrained(args.model)
-    model.parallelize()
+    #model.parallelize()
     tokenizer = GPT2Tokenizer.from_pretrained(args.tokenizer)
     tokenizer.pad_token = tokenizer.eos_token
     optimizer = torch.optim.Adam(model.parameters(), lr = 1e-4)
+    loss_fn = torch.nn.CrossEntropyLoss(reduction="none")
 
-    privacy_engine = PrivacyEngine(
-        model,
-        batch_size=args.batch_size,
-        sample_size=1024,
-        epochs=args.epochs,
-        max_grad_norm=0.1,
-        target_epsilon=3,
-    )
+    #privacy_engine = PrivacyEngine(
+    #    model,
+    #    batch_size=args.batch_size,
+    #    sample_size=1024,
+    #    epochs=args.epochs,
+    #    max_grad_norm=0.1,
+    #    target_epsilon=3,
+    #)
 
-    privacy_engine.attach(optimizer)
+    #privacy_engine.attach(optimizer)
 
     train_texts, train_labels = get_data('imdb/imdb_train.txt')
     train_data = Dataset(train_texts, train_labels, tokenizer.eos_token)
@@ -74,11 +75,13 @@ def run(args):
         for texts, labels in train_loader:
             
             prompts, total_texts = pre_process(texts, labels)
-            tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids.to('cuda:0')
-            tokenized_texts = tokenizer(total_texts, truncation=True, max_length=1024, return_tensors='pt', padding=True).input_ids.to('cuda:0')
+            tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids#.to('cuda:0')
+            tokenized_texts = tokenizer(total_texts, truncation=True, max_length=1024, return_tensors='pt', padding=True).input_ids#.to('cuda:0')
 
-            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss # - model(tokenized_prompts, labels=tokenized_text).loss*len()
-            print(lm_loss)
+            logits = model(tokenized_texts, labels=tokenized_texts).logits # - model(tokenized_prompts, labels=tokenized_text).loss*len()
+            print(logits.shape)
+            print(labels.shaoe)
+            lm_loss = 0
             optimizer.step(loss=lm_loss)
             total_loss += lm_loss.item()
 
@@ -89,10 +92,10 @@ if __name__=='__main__':
 
     parser = argparse.ArgumentParser()
     
-    parser.add_argument('--model', type=str, default='gpt2-xl', help='huggingface model name')
-    parser.add_argument('--tokenizer', type=str, default='gpt2-xl', help='huggingface model name')
+    parser.add_argument('--model', type=str, default='gpt2', help='huggingface model name')
+    parser.add_argument('--tokenizer', type=str, default='gpt2', help='huggingface model name')
     parser.add_argument('--epochs', type=int, default=3, help='number of finetuning epochs')
-    parser.add_argument('--batch-size', type=int, default=1)
+    parser.add_argument('--batch-size', type=int, default=8)
 
     args = parser.parse_args()
     run(args)
