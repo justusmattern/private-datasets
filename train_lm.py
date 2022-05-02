@@ -42,7 +42,15 @@ def pre_process(texts, labels):
         
     total_texts = [f'{p} {t}' for p, t in zip(prompts, texts)]
 
-    return prompts, total_texts
+    for l in labels:
+        if l == 0:
+            prompts.append("Write a positive review about a good movie:")
+        elif l == 1:
+            prompts.append("Write a negative review about a bad movie:")
+    
+    wrong_texts = [f'{p} {t}' for p, t in zip(prompts, texts)]
+
+    return prompts, total_texts, wrong_texts
 
 
 def run(args):
@@ -79,11 +87,16 @@ def run(args):
             iter += 1
             if iter % 100 == 0:
                 print(iter)
-            prompts, total_texts = pre_process(texts, labels)
+            prompts, total_texts, wrong_texts = pre_process(texts, labels)
             tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids.to('cuda:0')
             tokenized_texts = tokenizer(total_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
+            tokenized_texts_wrong = tokenizer(wrong_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
 
-            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0) # - model(tokenized_prompts, labels=tokenized_text).loss*len()
+            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0) - 0.2 * model(tokenized_texts_wrong, labels=tokenized_texts_wrong).loss.unsqueeze(dim=0)
+
+
+            
+            # - model(tokenized_prompts, labels=tokenized_text).loss*len()
             #print(logits.shape)
             #print(tokenized_texts.shape)
             #lm_loss = loss_fn(logits.permute(0,2,1), tokenized_texts).mean(dim=1)
