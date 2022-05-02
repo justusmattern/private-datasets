@@ -1,22 +1,46 @@
+import argparse
 import torch
 import transformers
 import torch.optim as optim
 from transformers import BertTokenizer, BertModel
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--gen_data', action='store_true')
+parser.add_argument('--device', type=int)
 
-train_texts = []
-train_labels = []
-with open('data/imdb_train.txt', 'r') as f:
-    for line in f:
-        train_texts.append(' '.join(line.split(' ')[1:]).replace('\n', ''))
-        train_labels.append(int(line.split(' ')[0]))
+args = parser.parse_args()
 
+if not args.gen_data:
+   print('using real data')
+   train_texts = []
+   train_labels = []
+   with open('imdb/imdb_train_head.txt', 'r') as f:
+       for line in f:
+           train_texts.append(' '.join(line.split(' ')[1:]).replace('\n', ''))
+           train_labels.append(int(line.split(' ')[0]))
+
+if args.gen_data:
+   print('using synth data')
+   train_texts = []
+   train_labels = []
+   with open('positive_gen_2500.txt', 'r') as f:
+     for line in f:
+           train_texts.append(' '.join(line.split('good movie:')[1:]).replace('\n', ''))
+           train_labels.append(1)
+   with open('negative_gen_2500.txt', 'r') as f:
+     for line in f:
+           train_texts.append(' '.join(line.split('bad movie:')[1:]).replace('\n', ''))
+           train_labels.append(0)
+
+#print('this is gen data')
 train_texts = train_texts[:5000]
 train_labels = train_labels[:5000]
 
+print(train_texts[:5])
+print(train_labels[:5])
 test_texts = []
 test_labels = []
-with open('data/imdb_test.txt', 'r') as f:
+with open('imdb/imdb_test.txt', 'r') as f:
     for line in f:
         test_texts.append(' '.join(line.split(' ')[1:]).replace('\n', ''))
         test_labels.append(int(line.split(' ')[0]))
@@ -65,14 +89,14 @@ class Model(torch.nn.Module):
         self.l1 = torch.nn.Linear(768,2)
 
     def forward(self, tokenized_text):
-        text_rep = self.bert_model(tokenized_text).pooler_output
+        text_rep = self.drop(self.bert_model(tokenized_text).pooler_output)
         out = self.l1(text_rep)
 
         return out
 
 model = Model()
 #model.load_state_dict(torch.load('bert-large-uncased'))
-model=model.to('cuda:3')
+model=model.to(f'cuda:{args.device}')
 
 optimizer = optim.Adam(model.parameters(), lr=1e-5)
 
@@ -93,7 +117,7 @@ for epoch in range(1,20):
         if iter%10 ==0:
             print(iter)
         iter += 1
-        input_tokens = tokenizer(texts, padding=True, return_tensors='pt', truncation=True, max_length=512).input_ids.to('cuda:3')
+        input_tokens = tokenizer(texts, padding=True, return_tensors='pt', truncation=True, max_length=512).input_ids.to(f'cuda:{args.device}')
         #print(input_tokens.shape)
         label = label.long()
         #print('input', input_tokens)
@@ -112,7 +136,7 @@ for epoch in range(1,20):
 
     print('training accuracy ', correct_predictions/len(train_data))
     torch.save(model.state_dict(), f'bert_base_imdb_epoch{epoch}.pt')
-    print(predictions)
+    #print(predictions)
     #print(truth_labels)
 
     model.eval()
@@ -120,7 +144,7 @@ for epoch in range(1,20):
     predictions = []
     truth_labels = []
     for texts, label in test_loader:
-        input_tokens = tokenizer(texts, padding=True, return_tensors='pt', truncation=True, max_length=512).input_ids.to('cuda:3')
+        input_tokens = tokenizer(texts, padding=True, return_tensors='pt', truncation=True, max_length=512).input_ids.to(f'cuda:{args.device}')
         label = label.long()
         model_output = model(input_tokens)
 
