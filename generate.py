@@ -17,15 +17,24 @@ def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames):
 
         while len(final_samples) < num_sequences:
             print('yeah')
-            sample_outputs = model.generate(
-                input_ids,
-                do_sample=True, 
-                max_length=512, 
-                top_k=40, 
-                top_p=0.95,
-                no_repeat_ngram_size=3,
-                num_return_sequences=10
-            )
+
+            if args.typical_decoding:
+                sample_outputs = model.sample(
+                    input_ids,
+                    max_length=512,
+                    typical_p=0.8
+                )
+
+            else:
+                sample_outputs = model.generate(
+                    input_ids,
+                    do_sample=True, 
+                    max_length=512, 
+                    top_k=40, 
+                    top_p=0.95,
+                    no_repeat_ngram_size=3,
+                    num_return_sequences=10
+                )
 
             
             for sample in sample_outputs:
@@ -47,8 +56,9 @@ if __name__ == '__main__':
     parser.add_argument('--prompts', type=str, nargs='+')
     parser.add_argument('--num-sequences-per-prompt', type=int, nargs='+')
     parser.add_argument('--filenames', type=str, nargs='+')
+    parser.add_argument('--typical-decoding', action='store_true')
 
     args = parser.parse_args()
 
-    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames)
+    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
 
