@@ -92,7 +92,10 @@ def run(args):
             tokenized_texts = tokenizer(total_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
             tokenized_texts_wrong = tokenizer(wrong_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
 
-            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0) - 0.2 * model(tokenized_texts_wrong, labels=tokenized_texts_wrong).loss.unsqueeze(dim=0)
+            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0)
+
+            if args.mismatch_loss:
+                lm_loss -= 0.2 * model(tokenized_texts_wrong, labels=tokenized_texts_wrong).loss.unsqueeze(dim=0)
 
 
             
@@ -119,6 +122,7 @@ if __name__=='__main__':
     parser.add_argument('--tokenizer', type=str, default='gpt2', help='huggingface model name')
     parser.add_argument('--epochs', type=int, default=3, help='number of finetuning epochs')
     parser.add_argument('--batch-size', type=int, default=8)
+    parser.add_argument('--mismatch-loss', action='store_true')
 
     args = parser.parse_args()
     run(args)
