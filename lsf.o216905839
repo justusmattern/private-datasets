@@ -1,0 +1,39 @@
+Sender: LSF System <lsfadmin@eu-g3-072>
+Subject: Job 216905839: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-40> by user <jmattern> in cluster <euler> at Mon May  2 23:03:00 2022
+Job was executed on host(s) <20*eu-g3-072>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Mon May  2 23:03:27 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Mon May  2 23:03:27 2022
+Terminated at Mon May  2 23:03:34 2022
+Results reported at Mon May  2 23:03:34 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python train_lm.py --model gpt2-xl --tokenizer gpt2-xl --epochs 5 --batch-size 1
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   0.23 sec.
+    Max Memory :                                 15 MB
+    Average Memory :                             6.00 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20465.00 MB
+    Max Swap :                                   -
+    Max Processes :                              1
+    Max Threads :                                1
+    Run time :                                   6 sec.
+    Turnaround time :                            34 sec.
+
+The output (if any) follows:
+
+  File "train_lm.py", line 43
+    total_texts = [f'{p} {t}' for p, t in zip(prompts, texts)]
+                            ^
+SyntaxError: invalid syntax

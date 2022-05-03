@@ -1,0 +1,370 @@
+Sender: LSF System <lsfadmin@eu-g3-082>
+Subject: Job 217028337: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-08> by user <jmattern> in cluster <euler> at Tue May  3 13:18:07 2022
+Job was executed on host(s) <20*eu-g3-082>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 13:18:48 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 13:18:48 2022
+Terminated at Tue May  3 13:18:53 2022
+Results reported at Tue May  3 13:18:53 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie:" "Write a positive review about a good movie:" --num-sequences-per-prompt 2500 2500 --filenames negative_generated_typical.txt positive_generated_typical.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   0.25 sec.
+    Max Memory :                                 14 MB
+    Average Memory :                             1.67 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20466.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                4
+    Run time :                                   1 sec.
+    Turnaround time :                            46 sec.
+
+The output (if any) follows:
+
+Traceback (most recent call last):
+  File "generate.py", line 1, in <module>
+    import torch
+ImportError: No module named torch
+Sender: LSF System <lsfadmin@eu-g3-082>
+Subject: Job 217033205: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-08> by user <jmattern> in cluster <euler> at Tue May  3 13:36:06 2022
+Job was executed on host(s) <20*eu-g3-082>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 13:36:16 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 13:36:16 2022
+Terminated at Tue May  3 13:40:20 2022
+Results reported at Tue May  3 13:40:20 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie:" "Write a positive review about a good movie:" --num-sequences-per-prompt 2500 2500 --filenames negative_generated_typical.txt positive_generated_typical.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   72.10 sec.
+    Max Memory :                                 20480 MB
+    Average Memory :                             7723.50 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               0.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                13
+    Run time :                                   243 sec.
+    Turnaround time :                            254 sec.
+
+The output (if any) follows:
+
+/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py:1840: UserWarning: `max_length` is deprecated in this function, use `stopping_criteria=StoppingCriteriaList(MaxLengthCriteria(max_length=max_length))` instead.
+  warnings.warn(
+yeah
+Write a negative review about a bad movie:  These kids are so stuffy. Half the movie is just these kids going around and doing silly activities. But every once in a while they act like a group of school kids--strongers, snow shots, tennis, hockey, roller blade for courage.  This is a Scary Movie but at least it showed Some real Old Scary Movies.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  they're taking the best part of Smurd-pick and making it horrible - my main character is a straight-up psychopath, so when they tell you who's going to look down that menacing and deadly neck while the poisonous guy sits a hundred feet away- ignominious as was Tears of the Damp Babies - is it any wonder why his friends are high-fiving and he's up at the side of this goddess? Stofler: The Alex M Zone presented the chick-flick confusion ofJane Fonda in a single screw in which, on a four hour sneak preview, she managed to get the two particular sensations that she needed to make this a thoroughly entertaining film: her hair, and a brief prod behind the tits (answer: God)......emotionally unbewildered onscreen as well as off. M. Ward: A buzzy cult film that sometimes brings the world to a coal blazing terminus: Watch with a lavender ashtray, and enjoy.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  You could just confirm all the stuff that is said about this movie by literally sneaking out into the street in New York City. It's one of those moments where Frank Capra's career enters all-out end-zone mode, right as he finishes the last run of the deReilly play; I see him ordering a bowl of gumbo, doors slammed in his face, and a cold cigarette in his mouth. He walks away and comes back, places the bowl in his mouth and a cigarette in his hand, and says kicker, "Does this all look to you like perfec- tive timing?" "Absolutely not." Capra smiles as his old Wild West music swells around him. — Jon Wertheim<|endoftext|>
+yeah
+Traceback (most recent call last):
+  File "generate.py", line 63, in <module>
+    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
+  File "generate.py", line 22, in generate
+    sample_outputs = model.sample(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py", line 1892, in sample
+    outputs = self(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 1047, in forward
+    transformer_outputs = self.transformer(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 890, in forward
+    outputs = block(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 395, in forward
+    attn_outputs = self.attn(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 325, in forward
+    key = torch.cat((past_key, key), dim=-2)
+RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 23.65 GiB total capacity; 21.76 GiB already allocated; 6.44 MiB free; 22.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Sender: LSF System <lsfadmin@eu-g3-069>
+Subject: Job 217036348: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-08> by user <jmattern> in cluster <euler> at Tue May  3 13:46:05 2022
+Job was executed on host(s) <20*eu-g3-069>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 13:51:45 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 13:51:45 2022
+Terminated at Tue May  3 13:55:06 2022
+Results reported at Tue May  3 13:55:06 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie:" "Write a positive review about a good movie:" --num-sequences-per-prompt 2500 2500 --filenames negative_generated_typical.txt positive_generated_typical.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   56.89 sec.
+    Max Memory :                                 20480 MB
+    Average Memory :                             8962.22 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               0.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                13
+    Run time :                                   200 sec.
+    Turnaround time :                            541 sec.
+
+The output (if any) follows:
+
+/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py:1840: UserWarning: `max_length` is deprecated in this function, use `stopping_criteria=StoppingCriteriaList(MaxLengthCriteria(max_length=max_length))` instead.
+  warnings.warn(
+yeah
+Traceback (most recent call last):
+  File "generate.py", line 63, in <module>
+    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
+  File "generate.py", line 22, in generate
+    sample_outputs = model.sample(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py", line 1892, in sample
+    outputs = self(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 1047, in forward
+    transformer_outputs = self.transformer(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 890, in forward
+    outputs = block(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 395, in forward
+    attn_outputs = self.attn(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 325, in forward
+    key = torch.cat((past_key, key), dim=-2)
+RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 23.65 GiB total capacity; 21.76 GiB already allocated; 6.44 MiB free; 22.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Sender: LSF System <lsfadmin@eu-g3-069>
+Subject: Job 217038361: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-08> by user <jmattern> in cluster <euler> at Tue May  3 14:06:12 2022
+Job was executed on host(s) <20*eu-g3-069>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 14:06:47 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 14:06:47 2022
+Terminated at Tue May  3 14:11:35 2022
+Results reported at Tue May  3 14:11:35 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie:" "Write a positive review about a good movie:" --num-sequences-per-prompt 2500 2500 --filenames negative_generated_typical.txt positive_generated_typical.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   130.33 sec.
+    Max Memory :                                 20480 MB
+    Average Memory :                             7843.46 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               0.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                13
+    Run time :                                   287 sec.
+    Turnaround time :                            323 sec.
+
+The output (if any) follows:
+
+/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py:1840: UserWarning: `max_length` is deprecated in this function, use `stopping_criteria=StoppingCriteriaList(MaxLengthCriteria(max_length=max_length))` instead.
+  warnings.warn(
+yeah
+Write a negative review about a bad movie:  Husband.--. A sagging, depleted M2 gun  rappels down the driveway....Improved performance from ChadErickson! I'd hate to lose a trade partner like that. What an unmitigated joy to watch. Amusing as hell. <|endoftext|>
+yeah
+Write a negative review about a bad movie:  It continues the formulaic gorefest seen a couple of times before from Bloodsport. There are a lot of guns, a cascade of running backs, an ambulance, guns, gunfire, and many, many missles towards dozens of pasty faces being picked clear from chilled blood. Alien bites, an envy of French cinema that's managed to get some results out of an architectural considered bastion, Shopping becomes more humane before our blood's stopped pumping. Trahan gets a lot Shiatsu, and looses her will thanks to a little cutting of the man's journey. <|endoftext|>
+yeah
+Write a negative review about a bad movie: 
+I wish, I say, I knew then how much I needed Hop through the Ages to get itching relief, but unfortunately it is not enough and the material isn't relatable - if it even has one commonality with anything. <|endoftext|>
+yeah
+Write a negative review about a bad movie:   I watched this without knowing any plot or characters. However, I certainly believe my disappointment in the film could be noted without a doubt. It's very poor filmmaking, poorly constructed.   I applaud Sarah Snook and her efforts on this project, but for something called Chili's Night in Chicago to come from a restaurant called 'Culinary Concepts' and promote the future battles of Teresa Giudice and her husband Joe, it fell totally flat. It did not stand out as a major cruddy, as what a waste of time. <|endoftext|>
+yeah
+Write a negative review about a bad movie:   6/10   The story of a young Latino who goes on a rampage at his girlfriend's workplace following the death of a longtime co-worker was álogic made to movieshy.   A draft of this updated version was sent to me over one year ago, and so saw it today and figured it was time to warn the camera society that not to miss this show.   MY MAJESTY's SON HAS BEEN DECEIVED!!!!!!!!!    The 2-3 minute optional long break for newswire in the beginning was just a wish that was fulfilled itself while the big melee at the office after the window was eviscerated every time that the boss gets down off his chair.   Nothing is ever shown of the inside of the office explaining the motivation and reasoning by false antagonistic media outlets about what did occur.    It was a good old theater cliché where the big man looks down and sees the big woman like that bunch of multi-million-dollar shit parts in crayon drawings is hanging on the walls.    It's really sad because this romantic no-name anti-hero thug is as comfortable with a gun in his hands as he is talking to your poor, infirm mother uninvited while his pedophilic hero ally guns down your neighbors.        Sam Peckinpah takes some of Mel Brooks' principles in creating this film in a different light, probably realizing that Mel wasn't trying to portray Mel Brooks as a sentimental old man with connections to Joseph Union Machtism.    His comedic underworld should be a bit of fun instead of trying to train people into becoming killers where they don't have to kill before.                  <|endoftext|>
+yeah
+Write a negative review about a bad movie:              This films is definitely a joint only for post-adolescent youth nowadays; It doesn't go anywhere, it's just 'dopested' (read: uninteresting) before getting hazy and silly again ('Big shoulders is it!' - C-Block, 2003)              A merryder verger than its protagonists ever dreamed meeting a good lady Wait A minute... this is the type of humor that got people murderer's row killed in those Outdoor Troy films?... I guess the situation might have been somewhat different with a rich Christian family rather than an aging party video kinda dude...                Perhaps the odd sub-plot dreary but predictably amusing (the music is a minor memento of the times for the poems, but not for young Buscatica) Once more the laity seem to get everything wrong especially Huggins, who then treats Imcetra as a good bitch and has the effing worst time.                   Rated R<|endoftext|>
+yeah
+Write a negative review about a bad movie:  The coolest thing about this movie is no reaction whatsoever when muscling your way into the ice machine, even though ievously you think that your ice was not too bothered about the strange stuff going around. A bit of freakishly imagining claustrophobic ieszeshelling offers an electromagnetic fine print.
+
+Fortunately this is /u/myangoda who sings lead!
+
+When we do get an object the ending is not bad, though it might have been better to show us the murders instead of it, it would seem that the killer might have changed. As they drive away he suppressed his voice and placed his whip on the steering wheel and he gives it one hell of a bite, oh yes that too. <|endoftext|>
+yeah
+Write a negative review about a bad movie:                                                         It's 1989 all over again, nors- er uring those swanky exhibits about rustic Middle American peasants at which Elvira draws ever grander and more tawdry characters than ever. And few more revoltingly, churningly stupid than this Weird Western hero, Franklin Moon (whom, admittedly, out of the stars and not into the dirt-ridden West that stands behind him, but still deeply weird).                                                                                                                                                                                                         <|endoftext|>
+yeah
+Write a negative review about a bad movie:  The new Star Wars movie is awesome! I thought it would be better.[sidebar: this movie is probably going to get me banned from certain websites boasting the characters all look alike, not to mention our hero Luke looks just like a super powered Darth Vader. ]  <|endoftext|>
+yeah
+Write a negative review about a bad movie:  Thor's childhood friend and future Army sniper Stryker Haggard is framed for murdering Emory Ward, who killed his father over an issue of his father's dog book. Haggard begs trial and duel, after which he is dragged off-stage and shot dead by Ward's wife, Wendy. Capt. John P. Murphy (Steven Hall) is called up from election campaigning and promptly indicted as a result. Murphy denies any role in the murder and despite the testimony of a hired killer (Michael Kenneth Williams), prosecutors downplay the case. When Wendy kisses Murphy in secret in a public place, presenting him with heart disease as backup, a protester helps bring the military police to the scene, whereupon Murphy gets a jug of the blood and then a necklock from the crowd.    *** The film is disturbingly unsubtle in its treatment of our hero. We get to know that he twice joined the service and is engaged to an unfortunate young widow (Jane Russell), and they live with Wilson's father (Walter Pidgeon), who dictates his life story and fragments of poetry to him. Meanwhile, while Haggard takes care of the horse, Wilson and a team of his ex-colleagues travel from place to place insulting and mistreating Hawaii's natives. Prelude to a final.   Unfortunately, it doesn't take long for Dorothy Woods to bubble over. In one drawl-crammed hemp-wearing beatnik demonstration, she becomes all set to set dogs on either side of me and drag me behind. She just tears off (or, rather, rips off) her costumes and jumps off the stage. Haggard is surrounded by Military Police outside, all of whom die solemnly clutching their guns. Then she and Wilson share 'rude' humor, followed by a couple of goons who beg they be shot in the head, before Wilson spurs their fear-based bursts of laughter ("men... terrified!").   Though this mostly makes for a laugh-a-minute take, hopefully they'll never get around to dubbing it in. <|endoftext|>
+yeah
+Traceback (most recent call last):
+  File "generate.py", line 63, in <module>
+    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
+  File "generate.py", line 22, in generate
+    sample_outputs = model.sample(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py", line 1892, in sample
+    outputs = self(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 1047, in forward
+    transformer_outputs = self.transformer(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 890, in forward
+    outputs = block(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 395, in forward
+    attn_outputs = self.attn(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 325, in forward
+    key = torch.cat((past_key, key), dim=-2)
+RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 23.65 GiB total capacity; 21.76 GiB already allocated; 6.44 MiB free; 22.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Sender: LSF System <lsfadmin@eu-g3-069>
+Subject: Job 217039111: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-08> by user <jmattern> in cluster <euler> at Tue May  3 14:20:27 2022
+Job was executed on host(s) <20*eu-g3-069>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 14:20:43 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 14:20:43 2022
+Terminated at Tue May  3 14:27:01 2022
+Results reported at Tue May  3 14:27:01 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie:" "Write a positive review about a good movie:" --num-sequences-per-prompt 2500 2500 --filenames negative_generated_typical.txt positive_generated_typical.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   227.35 sec.
+    Max Memory :                                 20480 MB
+    Average Memory :                             9169.67 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               0.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                13
+    Run time :                                   378 sec.
+    Turnaround time :                            394 sec.
+
+The output (if any) follows:
+
+/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py:1840: UserWarning: `max_length` is deprecated in this function, use `stopping_criteria=StoppingCriteriaList(MaxLengthCriteria(max_length=max_length))` instead.
+  warnings.warn(
+yeah
+Write a negative review about a bad movie:   The concept of the movie sounds awesome, but the execution left much to be desired: for one, the sound, the animation and the music hardly make it halfway through. The changes in plot, plot changes before the story even begins look to me like... well, wacky quincunxes; and yet, as much as I would like to say that the next chapter will fix things, I just don't want to write anything good about this movie.    Recommendation: Somewhere in an alley somewhere...   <|endoftext|>
+yeah
+Write a negative review about a bad movie:  Laura Dern is so wonderfully fine and relatively strong actress that makes professional every character by subtlety and by the cudgel executes horrible motive and agonizing scene in the doll project with plumarent unfortunates that include "unfortunate" old man [ language ] and eccentric uncle [ language ] that is dead [ language ] and I love every line made with 174-year old actress. oh and I consider " snowjams " scene as erotically lax you just do not want to urge puppet girl [ language ] her to go for the year [ language ] whenever the notorious rape [ language ] and true love [ language ] hammered maid [ language ] that judges spitting [ language ] and finger quivering mother [ language ] by laughing [ language ] at ridiculous " life backlanders " ( psychologist often use his experience in the circus). Q �  Crosses the princess' more than 2-year-old buddy at the new pool just for getting lazy drag rags she must be like smallest sized baby girl - but then they are tremendously put together -... sewers of misery and gloom.  <|endoftext|>
+yeah
+Write a negative review about a bad movie:    I didn't expect much from L bride. I have written about movies that are either containing cinema classics (the aforementioned Rabbit Hole), or startling hisical phenomenon (M grosses ). Rarely has a film made so much ground that made me promise myself to catch a later screening. But       Shirley Clarke has re-invigorated  Witchcraft: A Contemporary     on a par with her All That Jazz    Broadway   criticism.  Sylvia Shiffrin is somewhat hard to pin down. Honestly I can't tell her from a Tom Hanks. Yet. WOW! Be careful unseducated midwesterner if your spouse was keeping on your back as she did.      Hush your child's babble.      For  this era of the film        | Experience a modern witchcraft with beautiful cinematography that shows how the power of pals can work wonders.  <|endoftext|>
+yeah
+Write a negative review about a bad movie:  This film is painful for Mickey Rourke session but He still does his thing. But Daniel Day-Lewis is a second rate actor,Paul McGann is a disappointment in his effort,John Hurt by far the worst projection in the film and Jan De Bont plays a pathetic ghosties from hell Who was seen kissing her pukey husband in What Walks Counts he must be there to smile. Christopher McDonald is no counter report from a long dead trekker 20 years ago. Who is still the casualty of not even trying, and neither were the non-comics that filmed it. But it is the lack of experts casting that made your mouth water with astonishment. Only like one March sunshine ya know.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  I no longer doubt the fifth-greatest box-office hit ever, which bereft of characters or outright silliness should have been classification-banned. This is more like the Twilight Zone. Absolutely priceless for any fan. I don't even know if* * I'm missing that great line about a living wall? And what the hell is with that alien chair?... I can't quite tell what this movie took from a TV novel, except that it's not cozy and exotic, and doesn't make you fantasy-quaffing. And even a Hunter S. Thompson fanisn't going to throw down his keys in excitement...<|endoftext|>
+yeah
+Write a negative review about a bad movie:   When we finally get in there we learn that Barry Allen is a good guy who is just too fantastic to succumb to evil that to be honest has a bad case of the humor.   This can be safely said to be pages close to a Joan Rivers Certified Dumb Comedy.   Donald Pleasants plays a guy who is let off a train by a fop but decides to stay do this country's homage to the muscle man bands from Compton. <|endoftext|>
+yeah
+Write a negative review about a bad movie:  These Dr Phil interviews are no fantasy. They are real and they are good for the ages (Grandma Goes To The Winery and Sir Elton John found, perhaps, audiences too) Laura Flanders is a child prodigy with no one even to thank for her talent. She is promised a scholarship to the Foxwoods casino, if she can donate $5,000 to her uncle Walt's favorite charity: the Hearst Bronfman Mansion. The suggestion is a big step towards the elite. The owner Henry Hearst acquired it for his daughter's tenth birthday as an inheritance. It depicts the Stirge relationships in detail. Infant Gage (Jack Nicholson) has appeared with the Stirge form the wild (she literally spirals) into feeling great personal joy in his disposition to the riotous. Under the tutelage of Dr. Quackaroo, Liza (widely seen a porcelain doll). For her talent or some other reason isn't drawn into mistake, even accidentally. Lady Jane (Beryl Roden) is ditzy but loves to play the sax in a restaurant break when the music stops -ironically, at the very moment, that the fiery Stirge turns to a spanking new baby. The authentic Native Insects scurry away at the threat of lizards without a batting. Watch and observe.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  The Guest is not a good movie. It is bad bad bad bad bad bad bad bad bad.    It is weird to think that a movie based on a book by a male deeply uncomfortable with women suddenly has one fond of them. But, it's too late.    But that is exactly the audience the film hoped would watch it.    That the film is so mechanical is only part of the wacky premise: "Twenty years ago, an illusionist six foot three studio boss by day, who used to live in a hammock by night staged an act of murder disguised as a thunderstorm. He put the housewife running downstairs to see the lightning. She reacts to her husband being struck by loved ones. Final scene: outcomes of crime run the gamut....It may be a case study in a man manipulating things to suit his satisfaction." - Nicholas Gurewitch   God bless him and his work, gods I say.    It is definitely overstuffed with ten-year plotlines and pieced together like the Andromeda constellation.    Perhaps it is appropriate that the best scene in the film mostly depicts a familial drama where grandfather laps her an alcoholic uncle for not having been very supportive of her son.     Nothing generally wrong with this.    I would recommend it because it checks off all of the part time employer dusty old men who work a lot by day.    The conversation and dialog is the kind of rambling suck.    When Humphrey Bogart is not pounding his chest you can tell he is working.   <|endoftext|>
+yeah
+Write a negative review about a bad movie:   Let me start by saying I was not expecting or wanting counterfeit replicas of a renovation from empire films' "fuckin bad" by Lou Reed.   Waste of twenty thousand dollars at the cinema.   What was the company charging me to get in?   Anyone else end up with a disgustingly successful movie using what is essentially the same dreadful props I did 20 years ago.   Granted the scene with Lou in his underwear was funny regardless of Reed's lowrent performance, and it was a great details scene with one of Lou's first true films, and the overall flavour was also good, but I couldn't make much of it for awhile.   I also felt such a paucity of ideas as to be deeply disappointed that Lou may have opted for the same middling economic gimmick as Magnum, P.I.   The shot of moving house called Rain (Company One) was hilarious to watch, but the canoe scene brought back memories of me trying to get into a muddy, out of touristy Walmart store which had beautiful female adults on the itemizing belts placing their items on the mute divider.   Lou's use of Andy Warhol burlesque finally makes itself apparent as it evolves into a live burlesque tentin' night comedy show, but I have a feeling Lou didn't get much great mileage out of such undirected lowbrow humor.   The opinions expressed advantage of Lou Reed are not endorsed by the National Academy of Recording Arts and Sciences or Reed's own record company.  <|endoftext|>
+yeah
+Write a negative review about a bad movie:  I guess you have to admit that almost every one of the films at Lincoln Center is very overrated.... you get the hang of it pretty quick though in Return to NIMH and Good Will Hunting, though this one is much more than a typical cocky 80s film with the overabundance of demo suits and fast cars and huge house. Can't we just pretend the year is 2000, its just Brian, Carla and Adam sitting around at a table, a glass of orange juice and you have the most overrated movie ever. If you like comedy animation then return to the 60s, if you like National Lampoon, Jackass, or The Godfather, you're in for a treat.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  After watching some bad 90s movies at the midnight screenings, I was not sure what to expect. I didn't know how bad it could get by not using CGI, but I was impressed.  $10 of James Bond modeling is probably the worst dollar bill I've ever seen in my life. Great graphics, although some is a bit strange (looking at the sky in, it appears like two radio towers in 1). The only thing I like about 007 (looks like : 0707 when he carries the water cooler to the medical examination room - probably a 1969 connection). Harrison Ford is earning big profits off this edition of the James Bond franchise. 2 stars. Sure James Bond is involved, but sure he smokes too much afghainseedweed. I've seen better looking James Bond sex scenes with Pierce Brosnan - director of source games ago.  <|endoftext|>
+yeah
+Write a negative review about a bad movie:  I witnessed a scene with a HARD ASS TRANSFORMER MOVIE that left me quit cold.  Pity it's such a 'nice' movie while everyone else is RUINING IT!<|endoftext|>
+yeah
+Write a negative review about a bad movie:  Imagine at least having a decent laugh afterwards. You see, you came down Jenny from your castle on a white horse. You had far too much arrows and too much iskew, maybe the saddle didn't want to move, and neither do I! It's 1 third past midnight (!!!!), and old Grandfather gets as absolutely bored asleep on the castle balcony. Your head is big enough to lie on. You do as you pleased anyway, and Grandfather is just a vast hulk of mistman lying on his floor, dozing. Nothing you can do for him, and he soon nearly keels over. So Grandfather has to kick the throne when he cannot stir, and when you see him on the ground springing up, two massive legs spring out of his robes and tall billowing skirts. To me he looks like an anthropomorphic blue whale in a wind breaker, and he proceeds to lay a massive crab dish on top of his broad back. (view spoiler) So, you are perched on him, and he takes this opportunity to actually get down on all fours. And you think you might take advantage, slam those feet on his belly, and rocket him towards a wall. NOPE! Your feet minister not like that, nor does he. So you jump off the back and jump on the chest each, and escape with a licking. That grandmother is nowhere near done living to write about misery.<|endoftext|>
+yeah
+Write a negative review about a bad movie: <|endoftext|>
+yeah
+Write a negative review about a bad movie:     Sam Rockwell is one of those towering-shouldered comic actors who can fill a contest with ham, but none of his films have done much to establish that quality. This film is the opposite of stellar: it's the sort of promotional movie for the hair plastics and Beverly Hills Housewives one would find on a late-night channel. Then again, Rockwell's characters hardly have time to discuss their wardrobe, which is very better than the clothing styles he is also monetarily exploiting. Rockwell directs the little bit of action in the film, so it won't scare anyone's pants off, but it's loosely and horribly crudely grafted together from relatively clumsy clips. This mixture of amateurishness and said amateurishness keeps this from being an enjoyable addition to your collection of mail-order rental woobie flicks and keeps it from being a worthy addition to the truncated Anthony Mandler career.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  Fast and furious, weird, and a good time! LOL<|endoftext|>
+yeah
+Write a negative review about a bad movie:  God helping the deaf: 
+most young people grossly misjudge business like typography. The one who likes business type all send ions up a certain page at the end of the movie: 
+"Who would purely publish back science fiction from the Last Olympiad?" "I reran TAMRI on Alpha Centauri..." <|endoftext|>
+yeah
+Write a negative review about a bad movie:  This has no plot, no moving parts, not worthy of the name "giant movie".  Quite frankly the giants in this movie are the three dwarf CEOs.  Their opulence and artifice is cast out into the dark recesses of this motel by short-legged hoes in chicken costumes who hurl random crap in Lydia's direction.  It looks like something Arnold Schwarzenegger did for fame picture conventions.  Who would consider this better than Santa?  These cards remind me of a TV show from my childhood that just turned 50.  I don't miss it but at least they are not as bad as what Schwarzenegger had to do when he did all the "musically" right sequences in The Terminator.  If Arnold could do a Rocky style Esque wrestling scene he could have been Hollywood right from the start.  <|endoftext|>
+yeah
+Write a negative review about a bad movie:        A trio typing away in an office works perfectly until Mr. Linker comes to investigate the atrocious-looking typesetting by the scansion anignages.   Robert Linker is as dang good as he always was.   An excellent script.     Unfortunately unfavorably is all that can be said of this one- thirty-minute flop in 20th century memory space.  <|endoftext|>
+yeah
+Write a negative review about a bad movie:  Polish Burning is a stagy, nonsensical and cheap summer camp comedy with three randy campers, consisting solely of two DILISH women: CAOPIESNYN and IMPERTINE. According to the folks at TVM.eu, the show was produced in part at the later years of the Polish Television Corporation (PTK), the home of Jagiellonian Great Ring. They promoted it at the Holy Eucharist at Minsk's Cathedral at Saint Ignace (zznoreanie) on July 17, 1976; the Movie was shown on July 17 and 18, 1976 followed by various premieres. The latter, the last regular weekend – one feature was about a traveler who goes to Poland on a radioactive windscreen hitchhiking experience," as quoted by Wikipedia. Although the content of the film is totally unnecesary to be funny it is littered with a grandfather who was given a payday of $15 for the dog to "eat" a bitter substance as a Fate; a writing teacher who taught this to his students in the 1950's; the unhygienic and gossipy impression of the hot "Lover of the National Plants," Szymon Doboslawski who appears only as a silhouette; a dying camp granite barber who seems to be serving the first Bavarian Hund hot pot; and other such like-able "unfriends" of Poland. A florist always seems to come along with his mustache and hairish mustache, in turn, another character was slightly ruffled by a Spurs Jerseys uniform and his clothes are really embarrassing. Never an actual lion fight was ever held, it was much more poetically expressed as both swimming pool and USA-Brazil friendly to begin with.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  The final battle that takes place towards the end of the movie is stupid as f*ck. Stuck in a canyon, having literally all single tactics evaded, weighted down with a group of kids and a useless climber, the ants unleash a crushing attack on the enormous moisture-giant, which engulfs the ants in its tidal wave of water that peels away the obsidian cliffs and flame walls. Its rain is poor, but you guys can go back and watch it in 1990 and its still cheap fun. ___ Some characters are unlikable or dumb - Wilson gives a fairly staid, pseudo-philosophical aside about the evolution of human thought. __ ______________________ Score: 6 (B-) ______________________<|endoftext|>
+yeah
+Write a negative review about a bad movie:     This is the worst Pixar movie since Cars. Sorry, I'm not gonna say it's terrible. I just hear people say that it doesn't make any sense at all. Well, it's a poor excuse for animation art. Pixar draws like they want to draw because, one, they don't get paid good so they don't mind if it looks shitty. I'm just gonna say that if you drag it out for too long, the artwork gets to a point where you can stop caring about it and stop watching anyway.         While I was watching it, I recognized with disgust the most famous moments from Alfred Hitchcock movies I've seen. They were terrible, of course, but some things remain shocking to this day.       Clown is a walking cartoon Big Bug is..."A Bug for Christmas" that pulls a man out of his house hiding in a telephone box He acrobatics around the room displaying his fabulous singing Whiles giving sultry comments about his "trick" Using the assessor to chalk there feet and ears and sticking his tongue out at her he idolized a jockey, then jerked him to the workhouse In a first for the company, none of what they do is solved In a listed Intimate Moment of a bonded couple, we're treated to the man ponderously on the phone doing push ups while getting tousled in a pair of light blue moon boots.<|endoftext|>
+yeah
+Write a negative review about a bad movie:    This film is a direct vent of the Japanese dōjinshi scene to the West. The movie is overflowing with cringe-camera shots of Okinawa climbing the clouds as the U.S. feet do the Japanese basking in the sunrise. Watching the grotesque images going round and round all over the Ryukyu Islands is rather dreadful, after a while, as it has nothing high culture about it except all the ruddy old gangsters.    This film has not been released from Japan's infamous Amaji Corporation (A&E). They do not release even the smallest films out there above a 3 stars...does Amaji get their quota "locked-in"?<|endoftext|>
+yeah
+Write a negative review about a bad movie:  Let's get this out of the way: this is crap. Well, let's make it clear: I don't like this B-Movie. I hate feelings being left on the table by a film that is so dumb and so around any of its warts the only thing it does to get remembered is the Fifty Shades of Red movie with Nicole Kidman. 'It's all going to be alright!' No...seriously. 65 minutes of stereotypical old Hollywood BS for an audience of teenagers subsisting on Big Gulp Apples that sit around like it's Halloween: this is such a cheap ride that lies about and doesn't give nearly enough quality to be easily digestible.  Perhaps needless to say, it is not an example of modern filmmaking or acting either. It's the sparse style and 40s era of filmmaking we are dealt here that renders yourself unable to connect with this film.  It's all dreck after dreck.  For the casualbie like myself, it's like going outside on a slippery slipper trying to not fall over a 10 foot dark hole.  They are trying too hard to be funny...I guess you could give it a laugh if you don't give a fuck what is going on.<|endoftext|>
+yeah
+Write a negative review about a bad movie:  Confederate Motel is a pretty new movie from the great Leigh Janiak (Superstore) which stars the wonderful David Lipsky and Julie Bowen. It was shot in Bel Air and is not a bad movie.  The plot follows the usual male angst (as always!) and falls apart a bit in the middle sentence.  The movie has a lot of laughs, especially on one main character (Lipsky) and a few of the magnificent actors, is director Janiak has to worry about his aesthetic direction in the second half of the movie.  Until then, the movie is very charming.  This movie is also politically incorrect and very specifically portraying what it means to be a male romantic. Ironically, even after all the ladies are filled with accessories the general quality and attitude of the male characters is just about the same.  It was also quite often really funny.  While  other teen films are more about venting under the influence of drugs,  such an adult film is quite free of all such Dark Point stuff.  I hope the  umatic success of this movie underlines the fact that, as was proven years ago, that Leigh Janiak is a fine actor/director, capable of serious drama under very demanding and austere circumstances. <|endoftext|>
+yeah
+Traceback (most recent call last):
+  File "generate.py", line 64, in <module>
+    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
+  File "generate.py", line 22, in generate
+    sample_outputs = model.sample(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/generation_utils.py", line 1892, in sample
+    outputs = self(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 1047, in forward
+    transformer_outputs = self.transformer(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 890, in forward
+    outputs = block(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 395, in forward
+    attn_outputs = self.attn(
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 325, in forward
+    key = torch.cat((past_key, key), dim=-2)
+RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 23.65 GiB total capacity; 21.76 GiB already allocated; 6.44 MiB free; 22.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

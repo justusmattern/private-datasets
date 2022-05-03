@@ -23,11 +23,11 @@ if args.gen_data:
    print('using synth data')
    train_texts = []
    train_labels = []
-   with open('positive_gen_2500.txt', 'r') as f:
+   with open('positive_generated_typical.txt', 'r') as f:
      for line in f:
            train_texts.append(' '.join(line.split('good movie:')[1:]).replace('\n', ''))
            train_labels.append(1)
-   with open('negative_gen_2500.txt', 'r') as f:
+   with open('negative_generated_typical.txt', 'r') as f:
      for line in f:
            train_texts.append(' '.join(line.split('bad movie:')[1:]).replace('\n', ''))
            train_labels.append(0)

@@ -4,7 +4,7 @@ import os
 import sys
 import argparse
 
-def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames):
+def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding):
 
     tokenizer = GPT2Tokenizer.from_pretrained(tokenizer)
     model = GPT2LMHeadModel.from_pretrained(model, pad_token_id=tokenizer.eos_token_id)
@@ -18,11 +18,13 @@ def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames):
         while len(final_samples) < num_sequences:
             print('yeah')
 
-            if args.typical_decoding:
+            if typical_decoding:
                 sample_outputs = model.sample(
                     input_ids,
-                    max_length=512,
-                    typical_p=0.8
+                    max_length=300,
+                    typical_p=0.2,
+                    no_repeat_ngram_size=3,
+                    num_return_sequences=1
                 )
 
             else:

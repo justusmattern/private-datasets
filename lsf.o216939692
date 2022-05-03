@@ -1,0 +1,41 @@
+Sender: LSF System <lsfadmin@eu-g3-075>
+Subject: Job 216939692: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-40> by user <jmattern> in cluster <euler> at Tue May  3 02:42:08 2022
+Job was executed on host(s) <20*eu-g3-075>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 02:42:50 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 02:42:50 2022
+Terminated at Tue May  3 02:42:57 2022
+Results reported at Tue May  3 02:42:57 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie" "Write a positive review about a good movie" --num-sequences-per-prompts 2500 2500 --filenames negative_generated_typical.txt positive_generated_typical.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 2.
+
+Resource usage summary:
+
+    CPU time :                                   1.98 sec.
+    Max Memory :                                 96 MB
+    Average Memory :                             52.00 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20384.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   7 sec.
+    Turnaround time :                            49 sec.
+
+The output (if any) follows:
+
+usage: generate.py [-h] [--model MODEL] [--tokenizer TOKENIZER]
+                   [--prompts PROMPTS [PROMPTS ...]]
+                   [--num-sequences-per-prompt NUM_SEQUENCES_PER_PROMPT [NUM_SEQUENCES_PER_PROMPT ...]]
+                   [--filenames FILENAMES [FILENAMES ...]]
+                   [--typical-decoding]
+generate.py: error: unrecognized arguments: --num-sequences-per-prompts 2500 2500

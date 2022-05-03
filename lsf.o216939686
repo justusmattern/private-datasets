@@ -1,0 +1,39 @@
+Sender: LSF System <lsfadmin@eu-g3-075>
+Subject: Job 216939686: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-40> by user <jmattern> in cluster <euler> at Tue May  3 02:41:08 2022
+Job was executed on host(s) <20*eu-g3-075>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 02:41:46 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Tue May  3 02:41:46 2022
+Terminated at Tue May  3 02:42:49 2022
+Results reported at Tue May  3 02:42:49 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python generate.py --model gpt2_fewshot_epoch4 --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie" "Write a positive review about a good movie" --num-sequences-per-prompt 2500 2500 --filenames negative_generated.txt positive_generated.txt
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   3.52 sec.
+    Max Memory :                                 256 MB
+    Average Memory :                             64.25 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20224.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   62 sec.
+    Turnaround time :                            101 sec.
+
+The output (if any) follows:
+
+Traceback (most recent call last):
+  File "generate.py", line 63, in <module>
+    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
+TypeError: generate() takes 5 positional arguments but 6 were given
