@@ -7,7 +7,8 @@ from transformers import BertTokenizer, BertModel
 parser = argparse.ArgumentParser()
 parser.add_argument('--gen_data', action='store_true')
 parser.add_argument('--device', type=int)
-
+parser.add_argument('--pos-file', type=str, default='')
+parser.add_argument('--neg-file', type=str, default='')
 args = parser.parse_args()
 
 if not args.gen_data:
@@ -23,11 +24,11 @@ if args.gen_data:
    print('using synth data')
    train_texts = []
    train_labels = []
-   with open('positive_generated_typical.txt', 'r') as f:
+   with open(args.pos_file, 'r') as f:
      for line in f:
            train_texts.append(' '.join(line.split('good movie:')[1:]).replace('\n', ''))
            train_labels.append(1)
-   with open('negative_generated_typical.txt', 'r') as f:
+   with open(args.neg_file, 'r') as f:
      for line in f:
            train_texts.append(' '.join(line.split('bad movie:')[1:]).replace('\n', ''))
            train_labels.append(0)
