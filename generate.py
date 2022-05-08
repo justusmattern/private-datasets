@@ -22,7 +22,7 @@ def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames, typ
                 sample_outputs = model.sample(
                     input_ids,
                     max_length=300,
-                    typical_p=0.2,
+                    typical_p=0.1,
                     no_repeat_ngram_size=3,
                     num_return_sequences=1
                 )

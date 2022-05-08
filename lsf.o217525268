@@ -1,0 +1,38 @@
+Sender: LSF System <lsfadmin@eu-g3-070>
+Subject: Job 217525268: <synthdata> in cluster <euler> Exited
+
+Job <synthdata> was submitted from host <eu-login-26> by user <jmattern> in cluster <euler> at Fri May  6 14:01:19 2022
+Job was executed on host(s) <20*eu-g3-070>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Fri May  6 17:24:02 2022
+</cluster/home/jmattern> was used as the home directory.
+</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
+Started at Fri May  6 17:24:02 2022
+Terminated at Fri May  6 17:24:05 2022
+Results reported at Fri May  6 17:24:05 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/cluster/work/sachan/jmattern/myenv/bin/python --model gpt2_fewshot_epoch4_mismatch --tokenizer gpt2-xl --prompts "Write a negative review about a bad movie:" "Write a positive review about a good movie:" --num-sequences-per-prompt 3000 3000 --filenames typical_p0.1_negative_few50.txt typical_p0.1_positive_few50.txt --typical-decoding
+------------------------------------------------------------
+
+Exited with exit code 2.
+
+Resource usage summary:
+
+    CPU time :                                   0.23 sec.
+    Max Memory :                                 15 MB
+    Average Memory :                             -
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20465.00 MB
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   3 sec.
+    Turnaround time :                            12166 sec.
+
+The output (if any) follows:
+
+unknown option --model
+usage: /cluster/work/sachan/jmattern/myenv/bin/python [option] ... [-c cmd | -m mod | file | -] [arg] ...
+Try `python -h' for more information.

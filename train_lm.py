@@ -65,10 +65,10 @@ def run(args):
     privacy_engine = PrivacyEngine(
         model,
         batch_size=args.batch_size,
-        sample_size=1024,
+        sample_size=1000,
         epochs=args.epochs,
         max_grad_norm=0.1,
-        target_epsilon=8,
+        target_epsilon=3,
     )
 
     privacy_engine.attach(optimizer)
@@ -111,7 +111,7 @@ def run(args):
             total_loss += lm_loss.item()
 
         print('total lm loss', total_loss/len(train_data))
-        model.save_pretrained(f'gpt2_fewshot_epoch{epoch}')
+        model.save_pretrained(f'{args.model_out}_epoch{epoch}')
 
 
 if __name__=='__main__':
@@ -123,6 +123,7 @@ if __name__=='__main__':
     parser.add_argument('--epochs', type=int, default=3, help='number of finetuning epochs')
     parser.add_argument('--batch-size', type=int, default=8)
     parser.add_argument('--mismatch-loss', action='store_true')
+    parser.add_argument('--model-out', type=str)
 
     args = parser.parse_args()
     run(args)
