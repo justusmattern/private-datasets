@@ -4,114 +4,66 @@ import torch
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from private_transformers import PrivacyEngine
 import argparse
+from text_dataset import Dataset
+from utils import pre_process, get_data_from_txt
 
-def get_data(path):
-    texts = []
-    labels = []
-    with open(path, 'r') as f:
-        for line in f:
-            texts.append(' '.join(line.split(' ')[1:]).replace('\n', ''))
-            labels.append(int(line.split(' ')[0]))
+def forward_step(correct_texts, wrong_texts, tokenizer, model, mismatch_loss):
+    tokenized_texts = tokenizer(correct_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
+    tokenized_texts_wrong = tokenizer(wrong_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
+
+    lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0)
+
+    if mismatch_loss:
+        lm_loss -= 0.2 * model(tokenized_texts_wrong, labels=tokenized_texts_wrong).loss.unsqueeze(dim=0)
     
-    return texts, labels
+    return lm_loss
 
 
-class Dataset(torch.utils.data.Dataset):
-    def __init__(self, texts, labels, eos_token):
-       self.texts = texts
-       self.y = labels
-       self.eos_token = eos_token
-
-    def __len__(self):
-        return len(self.texts)
-
-    def __getitem__(self, index):
-        text = self.texts[index] + ' ' + self.eos_token
-        label = self.y[index]
-
-        return text, label
-
-def pre_process(texts, labels):
-    prompts = []
-
-    for l in labels:
-        if l == 1:
-            prompts.append("Write a positive review about a good movie:")
-        elif l == 0:
-            prompts.append("Write a negative review about a bad movie:")
-        
-    total_texts = [f'{p} {t}' for p, t in zip(prompts, texts)]
-
-    for l in labels:
-        if l == 0:
-            prompts.append("Write a positive review about a good movie:")
-        elif l == 1:
-            prompts.append("Write a negative review about a bad movie:")
-    
-    wrong_texts = [f'{p} {t}' for p, t in zip(prompts, texts)]
-
-    return prompts, total_texts, wrong_texts
-
-
-def run(args):
-    model = GPT2LMHeadModel.from_pretrained(args.model)
+def train_lm(args_model, args_tokenizer, args_epochs, args_prompts, args_batch_size, args_mismatch_loss, args_model_out, return_results, train_data, train_loader, args_dp_optimization):
+    model = GPT2LMHeadModel.from_pretrained(args_model)
     model.parallelize()
     model.train()
-    tokenizer = GPT2Tokenizer.from_pretrained(args.tokenizer)
+    tokenizer = GPT2Tokenizer.from_pretrained(args_tokenizer)
     tokenizer.pad_token = tokenizer.eos_token
     optimizer = torch.optim.Adam(model.parameters(), lr = 8e-6)
-    loss_fn = torch.nn.CrossEntropyLoss(reduction="none")
 
-    privacy_engine = PrivacyEngine(
-        model,
-        batch_size=args.batch_size,
-        sample_size=1000,
-        epochs=args.epochs,
-        max_grad_norm=0.1,
-        target_epsilon=3,
-    )
+    if args_dp_optimization:
+        privacy_engine = PrivacyEngine(
+            model,
+            batch_size=args_batch_size,
+            sample_size=1000,
+            epochs=args_epochs,
+            max_grad_norm=0.1,
+            target_epsilon=3,
+        )
+        privacy_engine.attach(optimizer)
 
-    privacy_engine.attach(optimizer)
-
-    train_texts, train_labels = get_data('imdb/imdb_train_head.txt')
-    train_data = Dataset(train_texts, train_labels, tokenizer.eos_token)
-
-    train_loader = torch.utils.data.DataLoader(train_data, shuffle=False, batch_size=args.batch_size)
-
-    for epoch in range(args.epochs):
+    for epoch in range(args_epochs):
         print(f'training epoch {epoch}')
 
         total_loss = 0
-        iter = 0
         for texts, labels in tqdm(train_loader):
-            iter += 1
-            if iter % 100 == 0:
-                print(iter)
-            prompts, total_texts, wrong_texts = pre_process(texts, labels)
-            tokenized_prompts = tokenizer(prompts, truncation=True, max_length=1024, return_tensors='pt').input_ids.to('cuda:0')
-            tokenized_texts = tokenizer(total_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
-            tokenized_texts_wrong = tokenizer(wrong_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
+            correct_texts, wrong_texts = pre_process(texts, labels, args_prompts)
+            lm_loss = forward_step(correct_texts, wrong_texts, tokenizer, model, args_mismatch_loss)
 
-            lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0)
+            if args_dp_optimization:
+                optimizer.step(loss=lm_loss)
+            else:
+                lm_loss = lm_loss.mean()
+                lm_loss.backward()
+                optimizer.step()
 
-            if args.mismatch_loss:
-                lm_loss -= 0.2 * model(tokenized_texts_wrong, labels=tokenized_texts_wrong).loss.unsqueeze(dim=0)
-
-
-            
-            # - model(tokenized_prompts, labels=tokenized_text).loss*len()
-            #print(logits.shape)
-            #print(tokenized_texts.shape)
-            #lm_loss = loss_fn(logits.permute(0,2,1), tokenized_texts).mean(dim=1)
-            #print('tot texts', total_texts)
-            #print(lm_loss)
-            #print(lm_loss.shape)
-            optimizer.step(loss=lm_loss)
-            #optimizer.step()
             total_loss += lm_loss.item()
 
-        print('total lm loss', total_loss/len(train_data))
-        model.save_pretrained(f'{args.model_out}_epoch{epoch}')
+        print('total language modeling loss', total_loss/len(train_data))
+        model.save_pretrained(f'{args_model_out}_epoch{epoch}')
+
+    print()
+    print('model training done!')
+    print()
+
+    if return_results:
+        return model
 
 
 if __name__=='__main__':
@@ -124,9 +76,20 @@ if __name__=='__main__':
     parser.add_argument('--batch-size', type=int, default=8)
     parser.add_argument('--mismatch-loss', action='store_true')
     parser.add_argument('--model-out', type=str)
-
+    parser.add_argument('--prompts', type=str, nargs='+', default=["Write a negative review about a bad movie:", "Write a positive review about a good movie:"])
+    parser.add_argument('--dp-optimization', action='store_true')
+    parser.add_argument('--mismatch-loss-weight', type='float')
     args = parser.parse_args()
-    run(args)
+
+    train_texts, train_labels = get_data_from_txt('imdb/imdb_train_head.txt')
+    train_data = Dataset(train_texts, train_labels, '<|endoftext|>')
+    train_loader = torch.utils.data.DataLoader(train_data, shuffle=False, batch_size=args.batch_size)
+
+    train_lm(args_model = args.model, 
+            args_tokenizer = args.tokenizer, args_epochs = args.epochs, args_prompts = args.prompts,
+            args_batch_size = args.batch_size, args_mismatch_loss = args.mismatch_loss, 
+            args_mismatch_weight = args.mismatch_loss_weight, args_model_out = args.model_out, return_results = False,
+            train_data=train_data, train_loader=train_loader, args_dp_optimization=args.dp_optimization)
 
 
 

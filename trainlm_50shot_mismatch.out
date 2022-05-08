@@ -1,153 +1,0 @@
-Sender: LSF System <lsfadmin@eu-g3-070>
-Subject: Job 217091381: <synthdata> in cluster <euler> Exited
-
-Job <synthdata> was submitted from host <eu-login-37> by user <jmattern> in cluster <euler> at Tue May  3 21:45:53 2022
-Job was executed on host(s) <20*eu-g3-070>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 21:48:13 2022
-</cluster/home/jmattern> was used as the home directory.
-</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
-Started at Tue May  3 21:48:13 2022
-Terminated at Tue May  3 21:48:21 2022
-Results reported at Tue May  3 21:48:21 2022
-
-Your job looked like:
-
-------------------------------------------------------------
-# LSBATCH: User input
-python train_lm.py --model gpt2-xl --tokenizer gpt2-xl --epochs 5 --mismatch-loss
-------------------------------------------------------------
-
-Exited with exit code 127.
-
-Resource usage summary:
-
-    CPU time :                                   0.20 sec.
-    Max Memory :                                 14 MB
-    Average Memory :                             2.00 MB
-    Total Requested Memory :                     20480.00 MB
-    Delta Memory :                               20466.00 MB
-    Max Swap :                                   -
-    Max Processes :                              1
-    Max Threads :                                1
-    Run time :                                   8 sec.
-    Turnaround time :                            148 sec.
-
-The output (if any) follows:
-
-python: error while loading shared libraries: libpython3.8.so.1.0: cannot open shared object file: No such file or directory
-Sender: LSF System <lsfadmin@eu-g3-070>
-Subject: Job 217094923: <synthdata> in cluster <euler> Exited
-
-Job <synthdata> was submitted from host <eu-login-37> by user <jmattern> in cluster <euler> at Tue May  3 22:31:31 2022
-Job was executed on host(s) <20*eu-g3-070>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 22:32:05 2022
-</cluster/home/jmattern> was used as the home directory.
-</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
-Started at Tue May  3 22:32:05 2022
-Terminated at Tue May  3 22:38:06 2022
-Results reported at Tue May  3 22:38:06 2022
-
-Your job looked like:
-
-------------------------------------------------------------
-# LSBATCH: User input
-python train_lm.py --model gpt2-xl --tokenizer gpt2-xl --epochs 5 --mismatch-loss
-------------------------------------------------------------
-
-Exited with exit code 1.
-
-Resource usage summary:
-
-    CPU time :                                   37.12 sec.
-    Max Memory :                                 20480 MB
-    Average Memory :                             7287.93 MB
-    Total Requested Memory :                     20480.00 MB
-    Delta Memory :                               0.00 MB
-    Max Swap :                                   -
-    Max Processes :                              4
-    Max Threads :                                13
-    Run time :                                   356 sec.
-    Turnaround time :                            395 sec.
-
-The output (if any) follows:
-
-training epoch 0
-  0%|          | 0/7 [00:00<?, ?it/s]/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py:1033: UserWarning: Using a non-full backward hook when the forward contains multiple autograd Nodes is deprecated and will be removed in future versions. This hook will be missing some grad_input. Please use register_full_backward_hook to get the documented behavior.
-  warnings.warn("Using a non-full backward hook when the forward contains multiple autograd Nodes "
-  0%|          | 0/7 [00:06<?, ?it/s]
-Traceback (most recent call last):
-  File "train_lm.py", line 128, in <module>
-    run(args)
-  File "train_lm.py", line 98, in run
-    lm_loss -= 0.2 * model(tokenized_texts_wrong, labels=tokenized_texts_wrong).loss.unsqueeze(dim=0)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
-    return forward_call(*input, **kwargs)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 1047, in forward
-    transformer_outputs = self.transformer(
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
-    return forward_call(*input, **kwargs)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/private_transformers/privacy_utils/transformers_support.py", line 282, in new_forward
-    outputs = block(
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
-    return forward_call(*input, **kwargs)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 432, in forward
-    feed_forward_hidden_states = self.mlp(hidden_states)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
-    return forward_call(*input, **kwargs)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 359, in forward
-    hidden_states = self.c_fc(hidden_states)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py", line 1128, in _call_impl
-    result = forward_call(*input, **kwargs)
-  File "/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/transformers/modeling_utils.py", line 2327, in forward
-    x = torch.addmm(self.bias, x.view(-1, x.size(-1)), self.weight)
-RuntimeError: CUDA out of memory. Tried to allocate 98.00 MiB (GPU 0; 23.65 GiB total capacity; 22.34 GiB already allocated; 2.44 MiB free; 22.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-Sender: LSF System <lsfadmin@eu-g3-054>
-Subject: Job 217099999: <synthdata> in cluster <euler> Done
-
-Job <synthdata> was submitted from host <eu-login-37> by user <jmattern> in cluster <euler> at Tue May  3 23:25:20 2022
-Job was executed on host(s) <20*eu-g3-054>, in queue <gpuhe.24h>, as user <jmattern> in cluster <euler> at Tue May  3 23:25:39 2022
-</cluster/home/jmattern> was used as the home directory.
-</cluster/work/sachan/jmattern/private-datasets> was used as the working directory.
-Started at Tue May  3 23:25:39 2022
-Terminated at Tue May  3 23:34:23 2022
-Results reported at Tue May  3 23:34:23 2022
-
-Your job looked like:
-
-------------------------------------------------------------
-# LSBATCH: User input
-python train_lm.py --model gpt2-xl --tokenizer gpt2-xl --epochs 5 --mismatch-loss --batch-size 1
-------------------------------------------------------------
-
-Successfully completed.
-
-Resource usage summary:
-
-    CPU time :                                   331.82 sec.
-    Max Memory :                                 20480 MB
-    Average Memory :                             12862.60 MB
-    Total Requested Memory :                     20480.00 MB
-    Delta Memory :                               0.00 MB
-    Max Swap :                                   -
-    Max Processes :                              3
-    Max Threads :                                18
-    Run time :                                   523 sec.
-    Turnaround time :                            543 sec.
-
-The output (if any) follows:
-
-training epoch 0
-  0%|          | 0/50 [00:00<?, ?it/s]/cluster/work/sachan/jmattern/myenv/lib64/python3.8/site-packages/torch/nn/modules/module.py:1033: UserWarning: Using a non-full backward hook when the forward contains multiple autograd Nodes is deprecated and will be removed in future versions. This hook will be missing some grad_input. Please use register_full_backward_hook to get the documented behavior.
-  warnings.warn("Using a non-full backward hook when the forward contains multiple autograd Nodes "
-  2%|▏         | 1/50 [00:07<05:43,  7.01s/it]  4%|▍         | 2/50 [00:08<02:49,  3.54s/it]  6%|▌         | 3/50 [00:09<02:00,  2.56s/it]  8%|▊         | 4/50 [00:10<01:28,  1.92s/it] 10%|█         | 5/50 [00:11<01:08,  1.53s/it] 12%|█▏        | 6/50 [00:12<00:57,  1.32s/it] 14%|█▍        | 7/50 [00:13<00:49,  1.16s/it] 16%|█▌        | 8/50 [00:13<00:43,  1.05s/it] 18%|█▊        | 9/50 [00:15<00:47,  1.16s/it] 20%|██        | 10/50 [00:16<00:46,  1.17s/it] 22%|██▏       | 11/50 [00:17<00:42,  1.10s/it] 24%|██▍       | 12/50 [00:18<00:42,  1.12s/it] 26%|██▌       | 13/50 [00:19<00:38,  1.05s/it] 28%|██▊       | 14/50 [00:20<00:33,  1.07it/s] 30%|███       | 15/50 [00:20<00:32,  1.09it/s] 32%|███▏      | 16/50 [00:22<00:36,  1.07s/it] 34%|███▍      | 17/50 [00:23<00:37,  1.13s/it] 36%|███▌      | 18/50 [00:24<00:35,  1.10s/it] 38%|███▊      | 19/50 [00:25<00:31,  1.02s/it] 40%|████      | 20/50 [00:26<00:30,  1.03s/it] 42%|████▏     | 21/50 [00:27<00:28,  1.01it/s] 44%|████▍     | 22/50 [00:28<00:26,  1.08it/s] 46%|████▌     | 23/50 [00:29<00:23,  1.13it/s] 48%|████▊     | 24/50 [00:30<00:26,  1.03s/it] 50%|█████     | 25/50 [00:31<00:24,  1.03it/s] 52%|█████▏    | 26/50 [00:32<00:22,  1.04it/s] 54%|█████▍    | 27/50 [00:32<00:20,  1.11it/s] 56%|█████▌    | 28/50 [00:33<00:18,  1.16it/s] 58%|█████▊    | 29/50 [00:34<00:18,  1.13it/s] 60%|██████    | 30/50 [00:35<00:17,  1.15it/s] 62%|██████▏   | 31/50 [00:36<00:15,  1.25it/s] 64%|██████▍   | 32/50 [00:36<00:13,  1.31it/s] 66%|██████▌   | 33/50 [00:37<00:15,  1.13it/s] 68%|██████▊   | 34/50 [00:38<00:14,  1.08it/s] 70%|███████   | 35/50 [00:39<00:12,  1.17it/s] 72%|███████▏  | 36/50 [00:40<00:11,  1.23it/s] 74%|███████▍  | 37/50 [00:41<00:10,  1.24it/s] 76%|███████▌  | 38/50 [00:42<00:09,  1.23it/s] 78%|███████▊  | 39/50 [00:43<00:10,  1.09it/s] 80%|████████  | 40/50 [00:44<00:09,  1.06it/s] 82%|████████▏ | 41/50 [00:45<00:08,  1.08it/s] 84%|████████▍ | 42/50 [00:45<00:07,  1.14it/s] 86%|████████▌ | 43/50 [00:46<00:06,  1.14it/s] 88%|████████▊ | 44/50 [00:47<00:05,  1.18it/s] 90%|█████████ | 45/50 [00:48<00:04,  1.15it/s] 92%|█████████▏| 46/50 [00:49<00:03,  1.18it/s] 94%|█████████▍| 47/50 [00:50<00:02,  1.11it/s] 96%|█████████▌| 48/50 [00:51<00:01,  1.10it/s] 98%|█████████▊| 49/50 [00:52<00:00,  1.05it/s]100%|██████████| 50/50 [00:53<00:00,  1.09s/it]100%|██████████| 50/50 [00:53<00:00,  1.07s/it]
-total lm loss 2.827124347686768
-training epoch 1
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:01<01:13,  1.49s/it]  4%|▍         | 2/50 [00:02<00:58,  1.23s/it]  6%|▌         | 3/50 [00:03<01:01,  1.30s/it]  8%|▊         | 4/50 [00:04<00:53,  1.15s/it] 10%|█         | 5/50 [00:05<00:46,  1.04s/it] 12%|█▏        | 6/50 [00:06<00:41,  1.06it/s] 14%|█▍        | 7/50 [00:07<00:39,  1.10it/s] 16%|█▌        | 8/50 [00:08<00:37,  1.13it/s] 18%|█▊        | 9/50 [00:09<00:43,  1.05s/it] 20%|██        | 10/50 [00:10<00:43,  1.09s/it] 22%|██▏       | 11/50 [00:11<00:40,  1.04s/it] 24%|██▍       | 12/50 [00:12<00:41,  1.08s/it] 26%|██▌       | 13/50 [00:13<00:37,  1.02s/it] 28%|██▊       | 14/50 [00:14<00:33,  1.09it/s] 30%|███       | 15/50 [00:15<00:31,  1.10it/s] 32%|███▏      | 16/50 [00:16<00:35,  1.05s/it] 34%|███▍      | 17/50 [00:17<00:36,  1.12s/it] 36%|███▌      | 18/50 [00:18<00:34,  1.09s/it] 38%|███▊      | 19/50 [00:19<00:31,  1.01s/it] 40%|████      | 20/50 [00:20<00:30,  1.02s/it] 42%|████▏     | 21/50 [00:21<00:28,  1.01it/s] 44%|████▍     | 22/50 [00:22<00:25,  1.08it/s] 46%|████▌     | 23/50 [00:23<00:23,  1.13it/s] 48%|████▊     | 24/50 [00:24<00:26,  1.03s/it] 50%|█████     | 25/50 [00:25<00:24,  1.03it/s] 52%|█████▏    | 26/50 [00:26<00:22,  1.04it/s] 54%|█████▍    | 27/50 [00:27<00:21,  1.09it/s] 56%|█████▌    | 28/50 [00:28<00:19,  1.15it/s] 58%|█████▊    | 29/50 [00:28<00:18,  1.12it/s] 60%|██████    | 30/50 [00:29<00:17,  1.15it/s] 62%|██████▏   | 31/50 [00:30<00:15,  1.25it/s] 64%|██████▍   | 32/50 [00:31<00:13,  1.31it/s] 66%|██████▌   | 33/50 [00:32<00:14,  1.13it/s] 68%|██████▊   | 34/50 [00:33<00:14,  1.08it/s] 70%|███████   | 35/50 [00:33<00:12,  1.18it/s] 72%|███████▏  | 36/50 [00:34<00:11,  1.24it/s] 74%|███████▍  | 37/50 [00:35<00:10,  1.24it/s] 76%|███████▌  | 38/50 [00:36<00:09,  1.23it/s] 78%|███████▊  | 39/50 [00:37<00:10,  1.09it/s] 80%|████████  | 40/50 [00:38<00:09,  1.07it/s] 82%|████████▏ | 41/50 [00:39<00:08,  1.08it/s] 84%|████████▍ | 42/50 [00:40<00:06,  1.14it/s] 86%|████████▌ | 43/50 [00:40<00:06,  1.14it/s] 88%|████████▊ | 44/50 [00:41<00:05,  1.19it/s] 90%|█████████ | 45/50 [00:42<00:04,  1.16it/s] 92%|█████████▏| 46/50 [00:43<00:03,  1.17it/s] 94%|█████████▍| 47/50 [00:44<00:02,  1.11it/s] 96%|█████████▌| 48/50 [00:45<00:01,  1.09it/s] 98%|█████████▊| 49/50 [00:46<00:00,  1.04it/s]100%|██████████| 50/50 [00:47<00:00,  1.09s/it]100%|██████████| 50/50 [00:47<00:00,  1.04it/s]
-total lm loss 2.728902611732483
-training epoch 2
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:01<01:13,  1.49s/it]  4%|▍         | 2/50 [00:02<00:58,  1.23s/it]  6%|▌         | 3/50 [00:03<01:01,  1.30s/it]  8%|▊         | 4/50 [00:04<00:53,  1.16s/it] 10%|█         | 5/50 [00:05<00:46,  1.04s/it] 12%|█▏        | 6/50 [00:06<00:41,  1.06it/s] 14%|█▍        | 7/50 [00:07<00:39,  1.10it/s] 16%|█▌        | 8/50 [00:08<00:36,  1.15it/s] 18%|█▊        | 9/50 [00:09<00:42,  1.04s/it] 20%|██        | 10/50 [00:10<00:43,  1.09s/it] 22%|██▏       | 11/50 [00:11<00:40,  1.04s/it] 24%|██▍       | 12/50 [00:12<00:41,  1.08s/it] 26%|██▌       | 13/50 [00:13<00:38,  1.03s/it] 28%|██▊       | 14/50 [00:14<00:33,  1.08it/s] 30%|███       | 15/50 [00:15<00:32,  1.09it/s] 32%|███▏      | 16/50 [00:16<00:36,  1.06s/it] 34%|███▍      | 17/50 [00:17<00:37,  1.13s/it] 36%|███▌      | 18/50 [00:18<00:35,  1.10s/it] 38%|███▊      | 19/50 [00:19<00:31,  1.02s/it] 40%|████      | 20/50 [00:20<00:30,  1.03s/it] 42%|████▏     | 21/50 [00:21<00:28,  1.00it/s] 44%|████▍     | 22/50 [00:22<00:26,  1.07it/s] 46%|████▌     | 23/50 [00:23<00:23,  1.13it/s] 48%|████▊     | 24/50 [00:24<00:26,  1.03s/it] 50%|█████     | 25/50 [00:25<00:24,  1.03it/s] 52%|█████▏    | 26/50 [00:26<00:22,  1.04it/s] 54%|█████▍    | 27/50 [00:27<00:20,  1.11it/s] 56%|█████▌    | 28/50 [00:28<00:18,  1.16it/s] 58%|█████▊    | 29/50 [00:28<00:18,  1.13it/s] 60%|██████    | 30/50 [00:29<00:17,  1.15it/s] 62%|██████▏   | 31/50 [00:30<00:15,  1.25it/s] 64%|██████▍   | 32/50 [00:31<00:13,  1.30it/s] 66%|██████▌   | 33/50 [00:32<00:15,  1.13it/s] 68%|██████▊   | 34/50 [00:33<00:14,  1.07it/s] 70%|███████   | 35/50 [00:33<00:12,  1.18it/s] 72%|███████▏  | 36/50 [00:34<00:11,  1.24it/s] 74%|███████▍  | 37/50 [00:35<00:10,  1.24it/s] 76%|███████▌  | 38/50 [00:36<00:09,  1.23it/s] 78%|███████▊  | 39/50 [00:37<00:10,  1.09it/s] 80%|████████  | 40/50 [00:38<00:09,  1.07it/s] 82%|████████▏ | 41/50 [00:39<00:08,  1.08it/s] 84%|████████▍ | 42/50 [00:40<00:07,  1.14it/s] 86%|████████▌ | 43/50 [00:41<00:06,  1.14it/s] 88%|████████▊ | 44/50 [00:41<00:05,  1.19it/s] 90%|█████████ | 45/50 [00:42<00:04,  1.16it/s] 92%|█████████▏| 46/50 [00:43<00:03,  1.18it/s] 94%|█████████▍| 47/50 [00:44<00:02,  1.11it/s] 96%|█████████▌| 48/50 [00:45<00:01,  1.10it/s] 98%|█████████▊| 49/50 [00:46<00:00,  1.05it/s]100%|██████████| 50/50 [00:47<00:00,  1.09s/it]100%|██████████| 50/50 [00:47<00:00,  1.04it/s]
-total lm loss 2.62932327747345
-training epoch 3
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:02<01:57,  2.41s/it]  4%|▍         | 2/50 [00:03<01:17,  1.61s/it]  6%|▌         | 3/50 [00:04<01:10,  1.51s/it]  8%|▊         | 4/50 [00:05<00:58,  1.28s/it] 10%|█         | 5/50 [00:06<00:50,  1.12s/it] 12%|█▏        | 6/50 [00:07<00:43,  1.00it/s] 14%|█▍        | 7/50 [00:08<00:40,  1.06it/s] 16%|█▌        | 8/50 [00:08<00:37,  1.12it/s] 18%|█▊        | 9/50 [00:10<00:43,  1.05s/it] 20%|██        | 10/50 [00:11<00:43,  1.10s/it] 22%|██▏       | 11/50 [00:12<00:40,  1.04s/it] 24%|██▍       | 12/50 [00:13<00:41,  1.08s/it] 26%|██▌       | 13/50 [00:14<00:37,  1.02s/it] 28%|██▊       | 14/50 [00:15<00:33,  1.09it/s] 30%|███       | 15/50 [00:16<00:31,  1.11it/s] 32%|███▏      | 16/50 [00:17<00:35,  1.06s/it] 34%|███▍      | 17/50 [00:18<00:38,  1.17s/it] 36%|███▌      | 18/50 [00:19<00:35,  1.12s/it] 38%|███▊      | 19/50 [00:20<00:33,  1.09s/it] 40%|████      | 20/50 [00:22<00:32,  1.08s/it] 42%|████▏     | 21/50 [00:22<00:29,  1.03s/it] 44%|████▍     | 22/50 [00:23<00:26,  1.05it/s] 46%|████▌     | 23/50 [00:24<00:24,  1.11it/s] 48%|████▊     | 24/50 [00:25<00:27,  1.05s/it] 50%|█████     | 25/50 [00:26<00:24,  1.02it/s] 52%|█████▏    | 26/50 [00:27<00:23,  1.04it/s] 54%|█████▍    | 27/50 [00:28<00:20,  1.10it/s] 56%|█████▌    | 28/50 [00:29<00:19,  1.16it/s] 58%|█████▊    | 29/50 [00:30<00:18,  1.13it/s] 60%|██████    | 30/50 [00:30<00:17,  1.15it/s] 62%|██████▏   | 31/50 [00:31<00:15,  1.25it/s] 64%|██████▍   | 32/50 [00:32<00:13,  1.31it/s] 66%|██████▌   | 33/50 [00:33<00:14,  1.14it/s] 68%|██████▊   | 34/50 [00:34<00:14,  1.08it/s] 70%|███████   | 35/50 [00:35<00:12,  1.18it/s] 72%|███████▏  | 36/50 [00:35<00:11,  1.24it/s] 74%|███████▍  | 37/50 [00:36<00:10,  1.24it/s] 76%|███████▌  | 38/50 [00:37<00:09,  1.22it/s] 78%|███████▊  | 39/50 [00:38<00:10,  1.09it/s] 80%|████████  | 40/50 [00:39<00:09,  1.07it/s] 82%|████████▏ | 41/50 [00:40<00:08,  1.08it/s] 84%|████████▍ | 42/50 [00:41<00:07,  1.14it/s] 86%|████████▌ | 43/50 [00:42<00:06,  1.14it/s] 88%|████████▊ | 44/50 [00:42<00:05,  1.19it/s] 90%|█████████ | 45/50 [00:43<00:04,  1.16it/s] 92%|█████████▏| 46/50 [00:44<00:03,  1.18it/s] 94%|█████████▍| 47/50 [00:45<00:02,  1.11it/s] 96%|█████████▌| 48/50 [00:46<00:01,  1.10it/s] 98%|█████████▊| 49/50 [00:47<00:00,  1.05it/s]100%|██████████| 50/50 [00:49<00:00,  1.09s/it]100%|██████████| 50/50 [00:49<00:00,  1.02it/s]
-total lm loss 2.5522873067855834
-training epoch 4
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:01<01:12,  1.49s/it]  4%|▍         | 2/50 [00:02<00:58,  1.23s/it]  6%|▌         | 3/50 [00:03<01:01,  1.30s/it]  8%|▊         | 4/50 [00:04<00:53,  1.16s/it] 10%|█         | 5/50 [00:05<00:46,  1.04s/it] 12%|█▏        | 6/50 [00:06<00:42,  1.05it/s] 14%|█▍        | 7/50 [00:07<00:39,  1.09it/s] 16%|█▌        | 8/50 [00:08<00:36,  1.14it/s] 18%|█▊        | 9/50 [00:09<00:42,  1.04s/it] 20%|██        | 10/50 [00:10<00:43,  1.09s/it] 22%|██▏       | 11/50 [00:11<00:40,  1.04s/it] 24%|██▍       | 12/50 [00:12<00:40,  1.08s/it] 26%|██▌       | 13/50 [00:13<00:37,  1.02s/it] 28%|██▊       | 14/50 [00:14<00:33,  1.09it/s] 30%|███       | 15/50 [00:15<00:31,  1.11it/s] 32%|███▏      | 16/50 [00:16<00:35,  1.05s/it] 34%|███▍      | 17/50 [00:17<00:36,  1.12s/it] 36%|███▌      | 18/50 [00:18<00:34,  1.09s/it] 38%|███▊      | 19/50 [00:19<00:31,  1.01s/it] 40%|████      | 20/50 [00:20<00:30,  1.02s/it] 42%|████▏     | 21/50 [00:21<00:28,  1.01it/s] 44%|████▍     | 22/50 [00:22<00:26,  1.08it/s] 46%|████▌     | 23/50 [00:23<00:23,  1.13it/s] 48%|████▊     | 24/50 [00:24<00:26,  1.03s/it] 50%|█████     | 25/50 [00:25<00:24,  1.02it/s] 52%|█████▏    | 26/50 [00:26<00:23,  1.04it/s] 54%|█████▍    | 27/50 [00:27<00:20,  1.10it/s] 56%|█████▌    | 28/50 [00:27<00:19,  1.15it/s] 58%|█████▊    | 29/50 [00:28<00:18,  1.13it/s] 60%|██████    | 30/50 [00:29<00:17,  1.15it/s] 62%|██████▏   | 31/50 [00:30<00:15,  1.25it/s] 64%|██████▍   | 32/50 [00:31<00:13,  1.31it/s] 66%|██████▌   | 33/50 [00:32<00:15,  1.13it/s] 68%|██████▊   | 34/50 [00:33<00:14,  1.07it/s] 70%|███████   | 35/50 [00:33<00:12,  1.17it/s] 72%|███████▏  | 36/50 [00:34<00:11,  1.23it/s] 74%|███████▍  | 37/50 [00:35<00:10,  1.23it/s] 76%|███████▌  | 38/50 [00:36<00:09,  1.23it/s] 78%|███████▊  | 39/50 [00:37<00:10,  1.09it/s] 80%|████████  | 40/50 [00:38<00:09,  1.07it/s] 82%|████████▏ | 41/50 [00:39<00:08,  1.08it/s] 84%|████████▍ | 42/50 [00:40<00:06,  1.14it/s] 86%|████████▌ | 43/50 [00:40<00:06,  1.14it/s] 88%|████████▊ | 44/50 [00:41<00:05,  1.17it/s] 90%|█████████ | 45/50 [00:42<00:04,  1.15it/s] 92%|█████████▏| 46/50 [00:43<00:03,  1.18it/s] 94%|█████████▍| 47/50 [00:44<00:02,  1.11it/s] 96%|█████████▌| 48/50 [00:45<00:01,  1.10it/s] 98%|█████████▊| 49/50 [00:46<00:00,  1.04it/s]100%|██████████| 50/50 [00:47<00:00,  1.09s/it]100%|██████████| 50/50 [00:47<00:00,  1.04it/s]
-total lm loss 2.50711895942688

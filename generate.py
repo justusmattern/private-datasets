@@ -3,20 +3,21 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import os
 import sys
 import argparse
+from utils import write_to_file
 
-def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding):
+def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding, return_texts):
 
-    tokenizer = GPT2Tokenizer.from_pretrained(tokenizer)
-    model = GPT2LMHeadModel.from_pretrained(model, pad_token_id=tokenizer.eos_token_id)
+    model = model
+    tokenizer = tokenizer
     model.parallelize()
-
+    sample_collections = []
     for prompt, num_sequences, file in zip(prompts, num_sequences_per_prompt, filenames):
+        
 
         input_ids = tokenizer.encode(prompt + ' ', return_tensors='pt').to('cuda:0')
         final_samples = []
 
         while len(final_samples) < num_sequences:
-            print('yeah')
 
             if typical_decoding:
                 sample_outputs = model.sample(
@@ -44,10 +45,17 @@ def generate(model, tokenizer, prompts, num_sequences_per_prompt, filenames, typ
                 print(text)
                 text = text.split(tokenizer.eos_token)[0]
                 final_samples.append(text)
+
+        if not return_texts:
+            write_to_file(final_samples, file)
         
-        with open(file, 'w') as f:
-            for sample in final_samples:
-                f.write(sample.replace('\n', ' ')+'\n')
+        sample_collections.append(final_samples)
+
+    if return_texts:
+        
+        return sample_collections
+            
+            
         
 
 if __name__ == '__main__':
@@ -62,5 +70,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    generate(args.model, args.tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding)
+    tokenizer = GPT2Tokenizer.from_pretrained(args.tokenizer)
+    model = GPT2LMHeadModel.from_pretrained(args.model, pad_token_id=tokenizer.eos_token_id)
+
+
+    generate(model, tokenizer, args.prompts, args.num_sequences_per_prompt, args.filenames, args.typical_decoding, return_texts=False)
 
