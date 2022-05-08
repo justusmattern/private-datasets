@@ -57,7 +57,7 @@ def run(args):
         model_out_file=args.model_out_file, 
         generated_filenames=args.generated_filenames, 
         typical_decoding=args.typical_decoding, 
-        dp_optimization=args.dp_optimizatiin, 
+        dp_optimization=args.dp_optimization, 
         num_sequences_per_prompt=args.num_sequences_per_prompt)
 
 
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     parser.add_argument('--prompts', type=str, nargs='+')
     parser.add_argument('--train-epochs', type=int)
     parser.add_argument('--train-batch-size', type=int)
-    parser.add_argument('--train-mismatch-loss', type=int)
+    parser.add_argument('--train-mismatch-loss', action='store_true')
     parser.add_argument('--train-mismatch-weight', type=float)
     parser.add_argument('--model-out-file', type=str)
     parser.add_argument('--generated-filenames', type=str, nargs='+')
