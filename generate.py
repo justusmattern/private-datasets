@@ -5,7 +5,7 @@ import sys
 import argparse
 from utils import write_to_file
 
-def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding, return_texts):
+def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding, return_texts, epsilon):
 
     model = model
     tokenizer = tokenizer
@@ -52,7 +52,7 @@ def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequ
         sample_collections.append(final_samples)
 
     if return_texts:
-        
+
         return sample_collections
             
             

@@ -9,7 +9,7 @@ from train_lm import train_lm
 from generate import generate
 
 def run_pipeline(base_model: str, base_tokenizer: str, training_file_path: str, train_epochs: int, prompts: List[str], train_batch_size: int, train_mismatch_loss: bool, 
-                train_mismatch_weight: float, model_out_file: str, generated_filenames: List[str], typical_decoding: bool, dp_optimization: bool, num_sequences_per_prompt: List[int]):
+                train_mismatch_weight: float, model_out_file: str, generated_filenames: List[str], typical_decoding: bool, dp_optimization: bool, num_sequences_per_prompt: List[int], epsilon: float):
 
     train_data, train_loader = prepare_training_data(training_file_path, train_batch_size)
 
@@ -25,7 +25,8 @@ def run_pipeline(base_model: str, base_tokenizer: str, training_file_path: str, 
         return_resuls=True,
         train_data=train_data,
         train_loader=train_loader,
-        args_dp_optimization=dp_optimization
+        args_dp_optimization=dp_optimization,
+        epsilon=epsilon
     )
 
     sample_collection = generate(
@@ -35,7 +36,7 @@ def run_pipeline(base_model: str, base_tokenizer: str, training_file_path: str, 
         num_sequences_per_prompt=num_sequences_per_prompt,
         filenames=generated_filenames,
         typical_decoding=typical_decoding,
-        return_texts=True,
+        return_texts=True
     )
 
     # later: add code to clean texts
@@ -58,7 +59,8 @@ def run(args):
         generated_filenames=args.generated_filenames, 
         typical_decoding=args.typical_decoding, 
         dp_optimization=args.dp_optimization, 
-        num_sequences_per_prompt=args.num_sequences_per_prompt)
+        num_sequences_per_prompt=args.num_sequences_per_prompt,
+        epsilon=args.epsilon)
 
 
 if __name__ == '__main__':
@@ -77,6 +79,7 @@ if __name__ == '__main__':
     parser.add_argument('--typical-decoding', action='store_true')
     parser.add_argument('--dp-optimization', action='store_true')
     parser.add_argument('--num-sequences-per-prompt', type=int, nargs='+')
+    parser.add_argument('--epsilon', type=float)
 
     args = parser.parse_args()
 

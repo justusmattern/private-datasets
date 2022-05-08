@@ -19,7 +19,7 @@ def forward_step(correct_texts, wrong_texts, tokenizer, model, mismatch_loss, mi
     return lm_loss
 
 
-def train_lm(args_model, args_tokenizer, args_epochs, args_prompts, args_batch_size, args_mismatch_loss, args_mismatch_weight, args_model_out, return_results, train_data, train_loader, args_dp_optimization):
+def train_lm(args_model, args_tokenizer, args_epochs, args_prompts, args_batch_size, args_mismatch_loss, args_mismatch_weight, args_model_out, return_results, train_data, train_loader, args_dp_optimization, epsilon):
     model = GPT2LMHeadModel.from_pretrained(args_model)
     model.parallelize()
     model.train()
@@ -34,7 +34,7 @@ def train_lm(args_model, args_tokenizer, args_epochs, args_prompts, args_batch_s
             sample_size=1000,
             epochs=args_epochs,
             max_grad_norm=0.1,
-            target_epsilon=3,
+            target_epsilon=epsilon,
         )
         privacy_engine.attach(optimizer)
 
