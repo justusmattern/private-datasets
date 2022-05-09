@@ -1,4 +1,5 @@
 import argparse
+from typing import List
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from torch import optim
@@ -8,8 +9,8 @@ from text_dataset import Dataset
 from train_lm import train_lm
 from generate import generate
 
-def run_pipeline(base_model: str, base_tokenizer: str, training_file_path: str, train_epochs: int, prompts: List[str], train_batch_size: int, train_mismatch_loss: bool, 
-                train_mismatch_weight: float, model_out_file: str, generated_filenames: List[str], typical_decoding: bool, dp_optimization: bool, num_sequences_per_prompt: List[int], epsilon: float):
+def run_pipeline(base_model: str, base_tokenizer: str, training_file_path: str, train_epochs: int, prompts, train_batch_size: int, train_mismatch_loss: bool, 
+                train_mismatch_weight: float, model_out_file: str, generated_filenames, typical_decoding: bool, dp_optimization: bool, num_sequences_per_prompt, epsilon: float):
 
     train_data, train_loader = prepare_training_data(training_file_path, train_batch_size)
 
