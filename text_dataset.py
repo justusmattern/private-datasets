@@ -1,3 +1,5 @@
+import torch
+
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, texts, labels, eos_token):
        self.texts = texts
