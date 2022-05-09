@@ -3,6 +3,7 @@ import torch
 import transformers
 import torch.optim as optim
 from transformers import BertTokenizer, BertModel
+import random
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--gen_data', action='store_true')
@@ -26,14 +27,22 @@ if args.gen_data:
    train_labels = []
    with open(args.pos_file, 'r') as f:
      for line in f:
-           train_texts.append(' '.join(line.split('good movie:')[1:]).replace('\n', ''))
+           text = ' '.join(line.split('good movie:')[1:]).replace('\n', '')
+           if len(text) > 10:
+               train_texts.append(text)
            train_labels.append(1)
    with open(args.neg_file, 'r') as f:
      for line in f:
-           train_texts.append(' '.join(line.split('bad movie:')[1:]).replace('\n', ''))
+           text = ' '.join(line.split('bad movie:')[1:]).replace('\n', '')
+           if len(text) > 10:
+               train_texts.append(text)
            train_labels.append(0)
 
 #print('this is gen data')
+c = list(zip(train_texts, train_labels))
+random.shuffle(c)
+train_texts, train_labels = zip(*c)
+
 train_texts = train_texts[:5000]
 train_labels = train_labels[:5000]
 
