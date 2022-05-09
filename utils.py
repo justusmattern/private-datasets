@@ -21,7 +21,7 @@ def pre_process(texts, labels, prompts):
         correct = prompts[label] + ' ' + text
         correct_texts.append(correct)
 
-        wrong = [prompts[l] + ' ' + text for l in labels if l != label]
+        wrong = [prompts[l] + ' ' + text for l in range(len(prompts)) if l != label]
         wrong_texts.extend(wrong)
 
     return correct_texts, wrong_texts
