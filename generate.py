@@ -5,7 +5,7 @@ import sys
 import argparse
 from utils import write_to_file
 
-def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding, return_texts, epsilon):
+def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequences_per_prompt, filenames, typical_decoding, return_texts):
 
     model = model
     tokenizer = tokenizer

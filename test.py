@@ -8,8 +8,8 @@ from text_dataset import Dataset
 from utils import pre_process, get_data_from_txt
 
 def forward_step(correct_texts, wrong_texts, tokenizer, model, mismatch_loss, mismatch_weight):
-    tokenized_texts = tokenizer(correct_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
-    tokenized_texts_wrong = tokenizer(wrong_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cuda:0')
+    tokenized_texts = tokenizer(correct_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cpu')
+    tokenized_texts_wrong = tokenizer(wrong_texts, truncation=True, max_length=500, return_tensors='pt', padding=True).input_ids.to('cpu')
 
     lm_loss = model(tokenized_texts, labels=tokenized_texts).loss.unsqueeze(dim=0)
 
@@ -21,12 +21,13 @@ def forward_step(correct_texts, wrong_texts, tokenizer, model, mismatch_loss, mi
 
 def train_lm(args_model, args_tokenizer, args_epochs, args_prompts, args_batch_size, args_mismatch_loss, args_mismatch_weight, args_model_out, return_results, train_data, train_loader, args_dp_optimization, epsilon):
     model = GPT2LMHeadModel.from_pretrained(args_model)
-    model.parallelize()
+    #model.parallelize()
     model.train()
     tokenizer = GPT2Tokenizer.from_pretrained(args_tokenizer)
     tokenizer.pad_token = tokenizer.eos_token
     optimizer = torch.optim.Adam(model.parameters(), lr = 8e-6)
-
+    print(args_epochs)
+    print(epsilon)
     if args_dp_optimization:
         privacy_engine = PrivacyEngine(
             model,
@@ -78,7 +79,8 @@ if __name__=='__main__':
     parser.add_argument('--model-out', type=str)
     parser.add_argument('--prompts', type=str, nargs='+', default=["Write a negative review about a bad movie:", "Write a positive review about a good movie:"])
     parser.add_argument('--dp-optimization', action='store_true')
-    parser.add_argument('--mismatch-loss-weight', type='float')
+    parser.add_argument('--mismatch-loss-weight', type=float)
+    parser.add_argument('--epsilon', type=float)
     args = parser.parse_args()
 
     train_texts, train_labels = get_data_from_txt('imdb/imdb_train_head.txt')
@@ -89,7 +91,7 @@ if __name__=='__main__':
             args_tokenizer = args.tokenizer, args_epochs = args.epochs, args_prompts = args.prompts,
             args_batch_size = args.batch_size, args_mismatch_loss = args.mismatch_loss, 
             args_mismatch_weight = args.mismatch_loss_weight, args_model_out = args.model_out, return_results = False,
-            train_data=train_data, train_loader=train_loader, args_dp_optimization=args.dp_optimization)
+            train_data=train_data, train_loader=train_loader, args_dp_optimization=args.dp_optimization, epsilon=args.epsilon)
 
 
 
