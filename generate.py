@@ -10,6 +10,7 @@ def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequ
     model = model
     tokenizer = tokenizer
     model.parallelize()
+    model.eval()
     sample_collections = []
     for prompt, num_sequences, file in zip(prompts, num_sequences_per_prompt, filenames):
         
@@ -32,9 +33,8 @@ def generate(model: GPT2LMHeadModel, tokenizer: GPT2Tokenizer, prompts, num_sequ
                 sample_outputs = model.generate(
                     input_ids,
                     do_sample=True, 
-                    max_length=512, 
-                    top_k=40, 
-                    top_p=0.95,
+                    max_length=512,  
+                    top_p=0.8,
                     no_repeat_ngram_size=3,
                     num_return_sequences=10
                 )
